@@ -23,13 +23,15 @@ import static java.util.Arrays.asList;
 public class Dokumentasjon {
 
     public static void digitalPost() {
-        Sertifikat mottakerSertifikat = null; //Sertifikat fra Oppslagstjenesten
+        Sertifikat mottakerSertifikat = null; //Mottakers sertifikat fra Oppslagstjenesten
         String orgnrPostkasse = "123456789";
 
-        Mottaker mottaker = Mottaker.builder("99999999999", "ola.nordmann#2222", mottakerSertifikat, orgnrPostkasse).build();
+        Mottaker mottaker = Mottaker.builder("99999999999",
+                "ola.nordmann#2222", mottakerSertifikat, orgnrPostkasse).build();
 
 
-        SmsVarsel smsVarsel = SmsVarsel.builder("4799999999", "Du har mottatt brev i din digitale postkasse")
+        SmsVarsel smsVarsel = SmsVarsel.builder("4799999999",
+                "Du har mottatt brev i din digitale postkasse")
                 .build();
 
         EpostVarsel epostVarsel = EpostVarsel.builder("example@fiktivepost.no.",
@@ -37,7 +39,7 @@ public class Dokumentasjon {
                 .varselEtterDager(asList(1, 4, 10))
                 .build();
 
-        DigitalPost digitalPost = DigitalPost.builder(mottaker, "Ikke-sensitiv tittel for forsendelsen")
+        DigitalPost digitalPost = DigitalPost.builder(mottaker, "Ikke-sensitiv tittel")
                 .virkningsdato(new Date())
                 .aapningskvittering(false)
                 .sikkerhetsnivaa(Sikkerhetsnivaa.NIVAA_3)
@@ -47,12 +49,15 @@ public class Dokumentasjon {
 
     }
 
-    public static void fysiskPostMottakerOgPost() {
+    public static void fysiskPost() {
         Sertifikat utskriftsleverandørSertifikat = null;    //Printsertifikat fra Oppslagstjenesten
         TekniskMottaker utskriftsleverandør = new TekniskMottaker("99999999", utskriftsleverandørSertifikat);
 
         FysiskPost fysiskPost = FysiskPost.builder()
-                .adresse(KonvoluttAdresse.build("Ola Nordmann").iNorge("Fjellheimen 22", "", "", "0001", "Oslo").build())
+                .adresse(
+                        KonvoluttAdresse.build("Ola Nordmann")
+                                .iNorge("Fjellheimen 22", "", "", "0001", "Oslo")
+                                .build())
                 .retur(
                         Returhaandtering.DIREKTE_RETUR.MAKULERING_MED_MELDING,
                         KonvoluttAdresse.build("Returkongen")
@@ -66,7 +71,8 @@ public class Dokumentasjon {
     public static void opprettForsendelse() {
         DigitalPost digitalPost = null; //Som initiert tidligere
 
-        Dokument hovedDokument = Dokument.builder("Sensitiv brevtittel", new File("/sti/til/dokument"))
+        Dokument hovedDokument = Dokument
+                .builder("Sensitiv brevtittel", new File("/sti/til/dokument"))
                 .mimeType("application/pdf")
                 .build();
 
@@ -74,9 +80,13 @@ public class Dokumentasjon {
                 .vedlegg(new ArrayList<Dokument>())
                 .build();
 
-        Behandlingsansvarlig behandlingsansvarlig = Behandlingsansvarlig.builder("999999999").build();
+        Behandlingsansvarlig behandlingsansvarlig =
+                Behandlingsansvarlig
+                        .builder("999999999")
+                        .build();
 
-        Forsendelse forsendelse = Forsendelse.digital(behandlingsansvarlig, digitalPost, dokumentpakke)
+        Forsendelse forsendelse = Forsendelse
+                .digital(behandlingsansvarlig, digitalPost, dokumentpakke)
                 .konversasjonsId(UUID.randomUUID().toString())
                 .prioritet(Prioritet.NORMAL)
                 .mpcId("KøId")
@@ -84,7 +94,7 @@ public class Dokumentasjon {
                 .build();
     }
 
-    public static void InitierKlientOgSendPost() {
+    public static void OppretteKlientOgSendPost() {
         Forsendelse forsendelse = null;         //Som initiert tidligere
         KeyStore virksomhetssertifikat = null;  //Last inn sertifikat her.
 
@@ -93,8 +103,13 @@ public class Dokumentasjon {
                 .connectionTimeout(20, TimeUnit.SECONDS)
                 .build();
 
-        TekniskAvsender avsender = TekniskAvsender.builder("000000000",
-                Noekkelpar.fraKeyStoreUtenTrustStore(virksomhetssertifikat, "sertifikatAlias", "sertifikatPassord")).build();
+        TekniskAvsender avsender = TekniskAvsender
+                .builder("000000000",
+                Noekkelpar.fraKeyStoreUtenTrustStore(
+                        virksomhetssertifikat,
+                        "sertifikatAlias",
+                        "sertifikatPassord"))
+                .build();
 
         SikkerDigitalPostKlient sikkerDigitalPostKlient = new SikkerDigitalPostKlient(avsender, klientKonfigurasjon);
 
@@ -125,9 +140,5 @@ public class Dokumentasjon {
         }
 
         sikkerDigitalPostKlient.bekreft(forretningsKvittering);
-    }
-
-    public static void BekreftKvittering(){
-
     }
 }
