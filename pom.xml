@@ -9,8 +9,7 @@
     <groupId>no.difi.sdp</groupId>
     <description>Regresjonstester av dokumentasjon</description>
 
- 
-    <modules>
+     <modules>
         <module>sdp-klient-v2.1</module>
     </modules>
 
