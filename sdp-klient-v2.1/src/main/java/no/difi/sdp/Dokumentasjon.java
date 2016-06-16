@@ -25,9 +25,10 @@ public class Dokumentasjon {
     public static void digitalPost() {
         Sertifikat mottakerSertifikat = null;   //Fås fra Oppslagstjenesten
         String orgnrPostkasse = null;           //Fås fra Oppslagstjenesten
+        String postkasseadresse = null;         //Fås fra Oppslagstjenesten
 
-        Mottaker mottaker = Mottaker.builder("99999999999",
-                "ola.nordmann#2222", mottakerSertifikat, orgnrPostkasse).build();
+        Mottaker mottaker = Mottaker.builder("99999999999", postkasseadresse
+                , mottakerSertifikat, orgnrPostkasse).build();
 
 
         SmsVarsel smsVarsel = SmsVarsel.builder("4799999999",
@@ -46,12 +47,12 @@ public class Dokumentasjon {
                 .epostVarsel(epostVarsel)
                 .smsVarsel(smsVarsel)
                 .build();
-
     }
 
     public static void fysiskPost() {
         Sertifikat utskriftsleverandørSertifikat = null;    //Printsertifikat fra Oppslagstjenesten
-        TekniskMottaker utskriftsleverandør = new TekniskMottaker("99999999", utskriftsleverandørSertifikat);
+        TekniskMottaker utskriftsleverandør =
+                new TekniskMottaker("99999999", utskriftsleverandørSertifikat);
 
         FysiskPost fysiskPost = FysiskPost.builder()
                 .adresse(
