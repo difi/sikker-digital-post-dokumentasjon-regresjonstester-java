@@ -23,8 +23,8 @@ import static java.util.Arrays.asList;
 public class Dokumentasjon {
 
     public static void digitalPost() {
-        Sertifikat mottakerSertifikat = null; //Mottakers sertifikat fra Oppslagstjenesten
-        String orgnrPostkasse = "123456789";
+        Sertifikat mottakerSertifikat = null;   //Fås fra Oppslagstjenesten
+        String orgnrPostkasse = null;           //Fås fra Oppslagstjenesten
 
         Mottaker mottaker = Mottaker.builder("99999999999",
                 "ola.nordmann#2222", mottakerSertifikat, orgnrPostkasse).build();
@@ -34,7 +34,7 @@ public class Dokumentasjon {
                 "Du har mottatt brev i din digitale postkasse")
                 .build();
 
-        EpostVarsel epostVarsel = EpostVarsel.builder("example@fiktivepost.no.",
+        EpostVarsel epostVarsel = EpostVarsel.builder("epost@example.com",
                 "Du har mottatt brev i din digitale postkasse")
                 .varselEtterDager(asList(1, 4, 10))
                 .build();
