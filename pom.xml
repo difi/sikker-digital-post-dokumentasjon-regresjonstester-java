@@ -12,6 +12,7 @@
      <modules>
          <module>sdp-klient-v2.1</module>
          <module>sdp-klient-v3</module>
+         <module>sdp-klient-v4</module>
     </modules>
 
 </project>
