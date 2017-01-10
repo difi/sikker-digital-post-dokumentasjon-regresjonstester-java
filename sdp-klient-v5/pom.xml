@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sdp-klient-dokumentasjon-v4</artifactId>
-    <version>4.0.0</version>
+    <artifactId>sdp-klient-dokumentasjon-v5</artifactId>
+    <version>5.0.0</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
     <description>Regresjonstester av dokumentasjon v${project.version}</description>
@@ -24,7 +24,7 @@
         <dependency>
             <groupId>no.difi.sdp</groupId>
             <artifactId>sikker-digital-post-klient-java</artifactId>
-            <version>4.0.0</version>
+            <version>5.1.0</version>
         </dependency>
     </dependencies>
 
